@@ -1,4 +1,4 @@
->>> text_indentation = __import__('5_text_indentation').text_indentation
+>>> text_indentation = __import__('text_indentation').text_indentation
 >>> text_indentation("Hello. How are you? I'm fine:")
 Hello.
 
