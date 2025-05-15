@@ -1,4 +1,11 @@
->>> add_integer = __import__('0-add_integer').add_integer
+===================
+testing function that add two integers
+===================
+
+Imported function from 0-add_integer.py
+===================
+    >>> add_integer = __import__('0-add_integer').add_integer
+
 >>> add_integer(1, 2)
 3
 >>> add_integer(100, -2)
@@ -15,3 +22,13 @@ TypeError: b must be an integer
 Traceback (most recent call last):
     ...
 TypeError: a must be an integer
+
+>>> add_integer(float('inf'))
+Traceback (most recent call last):
+    ...
+OverflowError: float overflow
+
+>>> add_integer(float('-inf'))
+Traceback (most recent call last):
+    ...
+OverflowError: float overflow
