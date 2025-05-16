@@ -1,25 +1,76 @@
->>> text_indentation = __import__('text_indentation').text_indentation
->>> text_indentation("Hello. How are you? I'm fine:")
-Hello.
+# Test for 5-text_indentation.py
+===========================
 
-How are you?
+Using ``text_indentation``
+---------------------
 
-I'm fine:
+Import the function:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
 
->>> text_indentation("No spaces after colon:   But after dot.  Yes.")
-No spaces after colon:
+Basic usage:
+    >>> text_indentation("Hello. World? Yes: No.")
+    Hello.
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+    Yes:
+    <BLANKLINE>
+    No.
+    <BLANKLINE>
 
-But after dot.
+Test with no special characters:
+    >>> text_indentation("Hello World")
+    Hello World
 
-Yes.
+Test with multiple spaces:
+    >>> text_indentation("Hello   .   World")
+    Hello   .
+    <BLANKLINE>
+    World
 
->>> text_indentation(42)
-Traceback (most recent call last):
-    ...
-TypeError: text must be a string
+Test with multiple special characters in sequence:
+    >>> text_indentation("Hi:.?.")
+    Hi:
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    .
+    <BLANKLINE>
 
->>> text_indentation("")
-<BLANKLINE>
+Test with empty string:
+    >>> text_indentation("")
 
->>> text_indentation("Test without special chars")
-Test without special chars
+Test with only special characters:
+    >>> text_indentation(".?:")
+    .
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Test with non-string input:
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with None:
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with newlines:
+    >>> text_indentation("Hello.\nWorld.")
+    Hello.
+    <BLANKLINE>
+    World.
+    <BLANKLINE>
+
+Test with spaces at beginning and end:
+    >>> text_indentation("   Hello.   World.   ")
+    Hello.
+    <BLANKLINE>
+    World.
+    <BLANKLINE>
