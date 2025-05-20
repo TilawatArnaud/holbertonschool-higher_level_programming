@@ -3,7 +3,8 @@
 
 
 class Square:
-    """Class that defines a square by its size, with validation and area computation."""
+    """Class that defines a square by its size,
+     with validation and area computation."""
 
     def __init__(self, size=0):
         """
