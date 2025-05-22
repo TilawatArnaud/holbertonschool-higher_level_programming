@@ -57,10 +57,10 @@ class Rectangle:
         """Return the rectangle represented with '#' characters."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        return '\n'.join(
-            self.print_symbol * self.__width
-            for _ in range(self.__height))
-
+        symbol = str(self.print_symbol)
+        lines = [symbol * self.__width for _ in range(self.__height)]
+        return "\n".join(lines)
+    
     def __repr__(self):
         """Return a string representation to recreate the instance."""
         return f"Rectangle({self.__width}, {self.__height})"
