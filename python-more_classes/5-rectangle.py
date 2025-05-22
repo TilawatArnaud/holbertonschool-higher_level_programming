@@ -1,14 +1,16 @@
 #!/usr/bin/python3
-"""Defines a class Rectangle with width and height validation."""
-
+"""Defines a class Rectangle with width, height, instance counter, and string representations."""
 
 class Rectangle:
     """Represents a rectangle."""
 
+    number_of_instances = 0  # Public class attribute to count instances
+
     def __init__(self, width=0, height=0):
-        """Initialize a new Rectangle instance."""
+        """Initialize width and height, increment instance counter."""
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -39,23 +41,26 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """Returns the rectangle area"""
-        return self.__height * self.__width
+        """Return the area of the rectangle."""
+        return self.__width * self.__height
 
     def perimeter(self):
-        """Returns the rectangle perimeter"""
-        if self.__height == 0 or self.__width == 0:
+        """Return the perimeter of the rectangle."""
+        if self.__width == 0 or self.__height == 0:
             return 0
-        return (self.__height * 2) + (self.__width * 2)
+        return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """Return the rectangle as a string of '#' characters."""
+        """Return the rectangle represented with '#' characters."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        return '\n'.join(["#" * self.__width for _ in range(self.__height)])
+        return '\n'.join(['#' * self.__width for _ in range(self.__height)])
 
     def __repr__(self):
+        """Return a string representation to recreate the instance."""
         return f"Rectangle({self.__width}, {self.__height})"
 
     def __del__(self):
+        """Print a message when an instance is deleted and decrement the counter."""
         print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
