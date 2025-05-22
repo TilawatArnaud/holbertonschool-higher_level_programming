@@ -7,13 +7,13 @@ class Rectangle:
     """Represents a rectangle."""
 
     number_of_instances = 0  # Public class attribute to count instances
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         """Initialize width and height, increment instance counter."""
         self.width = width
         self.height = height
         Rectangle.number_of_instances += 1
-        Rectangle.print_symbol = '#'
 
     @property
     def width(self):
@@ -58,7 +58,7 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return ""
         return '\n'.join(
-            Rectangle.print_symbol * self.__width
+            self.print_symbol * self.__width
             for _ in range(self.__height))
 
     def __repr__(self):
@@ -69,4 +69,4 @@ class Rectangle:
         """Print a message when an instance is deleted
         and decrement the counter."""
         print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1
+        self.number_of_instances -= 1
