@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Defines Shape abstract base class and its concrete subclasses Circle and Rectangle.
+Defines Shape abstract base class and its concrete subclasses
 Also includes a shape_info function using duck typing.
 """
 
