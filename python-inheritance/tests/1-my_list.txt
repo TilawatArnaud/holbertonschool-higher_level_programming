@@ -1,31 +1,88 @@
-===================
-Testing MyList class and print_sorted method
-===================
+==============================
+Test for the module 1-my_list
+==============================
 
+Importing the class:
+--------------------
 >>> MyList = __import__('1-my_list').MyList
 
+Basic tests:
+------------
 >>> my_list = MyList()
->>> my_list.append(3)
->>> my_list.append(1)
->>> my_list.append(2)
+>>> type(my_list)
+<class '1-my_list.MyList'>
 
->>> print(my_list)
-[3, 1, 2]
+>>> issubclass(MyList, list)
+True
 
+Empty list:
+-----------
+>>> my_list = MyList()
 >>> my_list.print_sorted()
-[1, 2, 3]
-
->>> print(my_list)
-[3, 1, 2]
-
->>> empty_list = MyList()
->>> empty_list.print_sorted()
 []
 
->>> sorted_list = MyList([1, 2, 3])
->>> sorted_list.print_sorted()
-[1, 2, 3]
+Adding elements to the list:
+----------------------------
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
 
->>> sorted_list.append(0)
->>> sorted_list.print_sorted()
-[0, 1, 2, 3]
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+>>> print(my_list)  # Verify the original list is unchanged
+[1, 4, 2, 3, 5]
+
+Single element list:
+--------------------
+>>> my_list = MyList()
+>>> my_list.append(42)
+>>> my_list.print_sorted()
+[42]
+
+List with negative numbers:
+---------------------------
+>>> my_list = MyList()
+>>> my_list.append(-1)
+>>> my_list.append(-4)
+>>> my_list.append(-2)
+>>> my_list.append(-3)
+>>> my_list.append(-5)
+>>> my_list.print_sorted()
+[-5, -4, -3, -2, -1]
+
+List with mixed positive and negative numbers:
+----------------------------------------------
+>>> my_list = MyList()
+>>> my_list.append(-1)
+>>> my_list.append(4)
+>>> my_list.append(-2)
+>>> my_list.append(3)
+>>> my_list.append(0)
+>>> my_list.print_sorted()
+[-2, -1, 0, 3, 4]
+
+Already sorted list:
+--------------------
+>>> my_list = MyList([1, 2, 3, 4, 5])
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+List with duplicates:
+---------------------
+>>> my_list = MyList([3, 1, 2, 3, 2, 1])
+>>> my_list.print_sorted()
+[1, 1, 2, 2, 3, 3]
+
+Passing a list at initialization:
+---------------------------------
+>>> my_list = MyList([5, 4, 3, 2, 1])
+>>> print(my_list)
+[5, 4, 3, 2, 1]
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
