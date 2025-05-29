@@ -1,0 +1,31 @@
+===================
+Testing MyList class and print_sorted method
+===================
+
+>>> MyList = __import__('1-my_list').MyList
+
+>>> my_list = MyList()
+>>> my_list.append(3)
+>>> my_list.append(1)
+>>> my_list.append(2)
+
+>>> print(my_list)
+[3, 1, 2]
+
+>>> my_list.print_sorted()
+[1, 2, 3]
+
+>>> print(my_list)
+[3, 1, 2]
+
+>>> empty_list = MyList()
+>>> empty_list.print_sorted()
+[]
+
+>>> sorted_list = MyList([1, 2, 3])
+>>> sorted_list.print_sorted()
+[1, 2, 3]
+
+>>> sorted_list.append(0)
+>>> sorted_list.print_sorted()
+[0, 1, 2, 3]
