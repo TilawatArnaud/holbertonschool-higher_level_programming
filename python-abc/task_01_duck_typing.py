@@ -1,67 +1,120 @@
 #!/usr/bin/env python3
 """
-Defines Shape abstract base class and its concrete subclasses
-Also includes a shape_info function using duck typing.
+This module implements a geometric shape system
+using abstract base classes and demonstrates the concept of duck typing in Python.
+
+Duck typing focuses on an object's behavior rather than its class inheritance.
+As long as an object implements the required methods, it is treated as the expected type.
+
+The module contains:
+- An abstract class Shape that defines the interface for geometric shapes
+- Two concrete classes: Circle and Rectangle, which inherit from Shape
+- A utility function shape_info that uses duck typing to interact with any shape
 """
 
-from abc import ABC, abstractmethod
 import math
+from abc import ABC, abstractmethod
+
+
+def shape_info(shape):
+    """
+    Displays information about a geometric shape.
+
+    This function uses duck typing and accepts any object that
+    implements area() and perimeter() methods, without checking its actual type.
+
+    Args:
+        shape: Any object with area() and perimeter() methods
+    """
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
 
 
 class Shape(ABC):
     """
-    Abstract base class for geometric shapes.
+    Abstract base class defining the interface for all geometric shapes.
     """
 
     @abstractmethod
     def area(self):
         """
-        Should return the area of the shape.
+        Abstract method to calculate the shape's area.
+        Must be implemented by all subclasses.
         """
         pass
 
     @abstractmethod
     def perimeter(self):
         """
-        Should return the perimeter of the shape.
+        Abstract method to calculate the shape's perimeter.
+        Must be implemented by all subclasses.
         """
         pass
 
 
 class Circle(Shape):
     """
-    Circle shape, defined by its radius.
+    Class representing a circle, inheriting from the Shape base class.
     """
 
     def __init__(self, radius):
-        self.__radius = radius
+        """
+        Initializes a circle with the given radius.
+
+        Args:
+            radius (float): The radius of the circle
+        """
+        self.radius = abs(radius)
 
     def area(self):
-        return math.pi * self.__radius ** 2
+        """
+        Calculates the area of the circle.
+
+        Returns:
+            float: The area of the circle (π * r²)
+        """
+        return math.pi * (self.radius ** 2)
 
     def perimeter(self):
-        return 2 * math.pi * self.__radius
+        """
+        Calculates the circumference of the circle.
+
+        Returns:
+            float: The circumference of the circle (2 * π * r)
+        """
+        return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
     """
-    Rectangle shape, defined by its width and height.
+    Class representing a rectangle, inheriting from the Shape base class.
     """
 
     def __init__(self, width, height):
-        self.__width = width
-        self.__height = height
+        """
+        Initializes a rectangle with the given width and height.
+
+        Args:
+            width (float): The width of the rectangle
+            height (float): The height of the rectangle
+        """
+        self.width = width
+        self.height = height
 
     def area(self):
-        return self.__width * self.__height
+        """
+        Calculates the area of the rectangle.
+
+        Returns:
+            float: The area of the rectangle (width * height)
+        """
+        return self.width * self.height
 
     def perimeter(self):
-        return 2 * (self.__width + self.__height)
+        """
+        Calculates the perimeter of the rectangle.
 
-
-def shape_info(shape):
-    """
-    Prints area and perimeter of a shape using duck typing.
-    """
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
+        Returns:
+            float: The perimeter of the rectangle (2 * (width + height))
+        """
+        return 2 * (self.width + self.height)
