@@ -1,13 +1,28 @@
 #!/usr/bin/python3
 """
-Module for class_to_obj
+Module for class_to_json
 """
 
 
-def class_to_obj(obj):
+def class_to_json(obj):
     """
-    Function that returns the dictionary description with simple data structure
+    Returns the dictionary description with simple data structure
     (list, dictionary, string, integer and boolean) for JSON serialization of
     an object.
+    
+    Args:
+        obj: An instance of a class with serializable attributes
+        
+    Returns:
+        dict: A dictionary containing all serializable attributes of the object
     """
-    return obj.__dict__
+    result = {}
+    for key, value in obj.__dict__.items():
+        # Check if the value is a basic type (int, str, bool, list, dict)
+        if isinstance(value, (int, str, bool, list, dict)):
+            result[key] = value
+        # Handle private name mangling (e.g., __name becomes _ClassName__name)
+        elif key.startswith('_') and not key.startswith('__'):
+            result[key] = value
+    return result
+    
