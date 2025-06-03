@@ -2,6 +2,8 @@
 """
 Module for Student class
 """
+
+
 class Student:
     """
     Class for Student
@@ -26,14 +28,14 @@ class Student:
     def to_json(self):
         """
         Returns the dictionary description with simple data structure
-        (list, dictionary, string, integer and boolean) for JSON serialization of
-        an object.
+        (list, dictionary, string, integer and boolean)
+        for JSON serialization of an object.
 
         Args:
             obj: An instance of a class with serializable attributes
 
         Returns:
-            dict: A dictionary containing all serializable attributes of the object
+            A dictionary containing all serializable attributes of the object
         """
         result = {}
         for key, value in self.__dict__.items():
