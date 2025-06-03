@@ -40,8 +40,7 @@ class CustomObject:
         """
         try:
             return pickle.dumps(self)
-        except (pickle.PicklingError, AttributeError) as e:
-            print(f"Serialization error: {e}")
+        except (pickle.PicklingError, AttributeError):
             return None
 
     @classmethod
@@ -57,6 +56,5 @@ class CustomObject:
         """
         try:
             return pickle.loads(data)
-        except (pickle.UnpicklingError, AttributeError, EOFError) as e:
-            print(f"Deserialization error: {e}")
+        except (pickle.UnpicklingError, AttributeError, EOFError):
             return None
