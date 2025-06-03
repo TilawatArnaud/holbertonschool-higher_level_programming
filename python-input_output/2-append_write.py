@@ -3,6 +3,7 @@
     Modules for append write
 """
 
+
 def append_write(filename="", text=""):
     """Writes a string to a text file (UTF8) and returns character count.
 
