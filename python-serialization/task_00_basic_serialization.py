@@ -11,6 +11,7 @@ def serialization_and_save_tofile(data, filename):
     import json
     with open(filename, 'w') as f:
         json.dump(data, f)
+    pass
 
 
 def load_and_deserialize(filename):
@@ -26,3 +27,4 @@ def load_and_deserialize(filename):
     import json
     with open(filename, 'r') as f:
         return json.load(f)
+    pass
