@@ -4,13 +4,14 @@ Module for demonstrating object serialization using pickle.
 """
 
 import pickle
+import os
 
 
 class CustomObject:
     """
     A custom class that demonstrates serialization using pickle.
     """
-    def __init__(self, name, age, is_student):
+    def __init__(self, name="", age=0, is_student=False):
         """
         Initialize a CustomObject instance.
 
@@ -31,30 +32,39 @@ class CustomObject:
         print(f"Age: {self.age}")
         print(f"Is Student: {self.is_student}")
 
-    def serialize(self):
+    def serialize(self, filename):
         """
-        Serialize the object to a byte stream using pickle.
+        Serialize the object to a file using pickle.
+
+        Args:
+            filename (str): The name of the file to save the serialized object
 
         Returns:
-            bytes: The serialized object, or None if serialization fails
+            int: 1 if successful, None otherwise
         """
         try:
-            return pickle.dumps(self)
-        except (pickle.PicklingError, AttributeError):
+            with open(filename, 'wb') as file:
+                pickle.dump(self, file)
+            return 1
+        except (pickle.PicklingError, IOError, AttributeError):
             return None
 
     @classmethod
-    def deserialize(cls, data):
+    def deserialize(cls, filename):
         """
-        Deserialize an object from a byte stream.
+        Deserialize an object from a file.
 
         Args:
-            data (bytes): The serialized object data
+            filename (str): The name of the file to load the serialized object
 
         Returns:
-            CustomObject: The deserialized object, or None if deserialization fails
+            CustomObject: The deserialized object
+            None if deserialization fails
         """
         try:
-            return pickle.loads(data)
-        except (pickle.UnpicklingError, AttributeError, EOFError):
+            if not os.path.exists(filename):
+                return None
+            with open(filename, 'rb') as file:
+                return pickle.load(file)
+        except (pickle.UnpicklingError, AttributeError, EOFError, IOError):
             return None
