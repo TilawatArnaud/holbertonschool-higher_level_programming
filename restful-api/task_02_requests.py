@@ -21,7 +21,6 @@ def fetch_and_print_posts():
     This function makes a GET request to the API to fetch all posts.
     If successful, it prints each post's title.
     The status code is also printed.
-
     Returns:
         None
     """
@@ -44,7 +43,6 @@ def fetch_and_save_posts():
     If successful, it saves the posts to 'posts.csv'
     with columns for id, title, and body.
     The file is created in the current directory.
-
     Returns:
         None
     """
