@@ -20,7 +20,13 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         """
         Handle GET requests by sending appropriate responses.
         """
-        if self.path == '/data':
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"Hello, this is a simple API!")
+
+        elif self.path == '/data':
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
@@ -36,6 +42,16 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(b"OK")
+
+        elif self.path == '/info':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            info_data = {
+                "version": "1.0",
+                "description": "A simple API built with http.server"
+            }
+            self.wfile.write(json.dumps(info_data).encode('utf-8'))
 
         else:
             self.send_response(404)
