@@ -31,7 +31,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            message = {"OK"}
+            message = {"status": "OK"}
             self.wfile.write(json.dumps(message).encode('utf-8'))
             return
 
@@ -50,7 +50,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            message = {"Endpoint not found"}
+            message = {"status": "404 Not Found", "message": "Endpoint not found"}
             self.wfile.write(json.dumps(message).encode('utf-8'))
 
 
