@@ -21,8 +21,8 @@ def get_usernames():
 
 @app.route('/status')
 def get_status():
-    """Return a JSON response containing the status of the API."""
-    return jsonify({"status": "OK"})
+    """Return a string containing the status of the API."""
+    return "OK"
 
 @app.route('/users/<username>')
 def get_user(username): 
