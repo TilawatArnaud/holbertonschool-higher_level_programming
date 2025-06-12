@@ -31,7 +31,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            message = {"status": "ok"}
+            message = {"status": "OK"}
             self.wfile.write(json.dumps(message).encode('utf-8'))
             return
 
