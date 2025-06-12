@@ -1,17 +1,16 @@
 #!/usr/bin/python3
+"""Module for handling HTTP GET requests."""
+
 import http.server
 import json
 PORT = 8000
-"""
-Class for handling HTTP GET requests.
-"""
 
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
-    """
-    Handle HTTP GET requests.
-    """
+    """Handle HTTP GET requests."""
+
     def do_GET(self):
+        """Handle GET requests."""
         if self.path == '/':
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
@@ -36,18 +35,27 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(bytes(message, "utf8"))
             return
 
+        elif self.path == '/info':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            info = {
+                "version": "1.0",
+                "description": "A simple API built with http.server"
+            }
+            self.wfile.write(json.dumps(info).encode('utf-8'))
+            return
+
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            message = "Error 404: Not Found"
+            message = "Endpoint not found"
             self.wfile.write(bytes(message, "utf8"))
 
 
 def run():
-    """
-    Run the HTTP server.
-    """
+    """Run the HTTP server."""
     server_address = ('', PORT)
     httpd = http.server.HTTPServer(server_address, SimpleHTTPRequestHandler)
     print(f"Serving on port {PORT}")
