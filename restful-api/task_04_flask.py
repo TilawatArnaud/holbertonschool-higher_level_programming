@@ -22,7 +22,7 @@ def get_usernames():
 @app.route('/status')
 def get_status():
     """Return a JSON response containing the status of the API."""
-    return "OK"
+    return jsonify({"status": "OK"})
 
 @app.route('/users/<username>')
 def get_user(username): 
@@ -40,30 +40,26 @@ def add_user():
         
     data = request.get_json()
     
-    username = data.get('username')
-    if not username:
-        return jsonify({"error": "Missing username"}), 400
+    if 'username' not in data:
+        return jsonify({"error": "Username is required"}), 400
     
+    username = data['username']
     if username in users:
         return jsonify({"error": "User already exists"}), 400
     
-    required_fields = ['name', 'age', 'city']
-    for field in required_fields:
-        if field not in data:
-            return jsonify({"error": f"Missing {field}"}), 400
-    
-    try:
-        age = int(data['age'])
-    except (ValueError, TypeError):
-        return jsonify({"error": "age must be an integer"}), 400
-    
-    users[username] = {
-        "username": username,
-        "name": data['name'],
-        "age": age,
-        "city": data['city']
+    user_data = {
+        'username': username,
+        'name': data.get('name', ''),
+        'age': data.get('age'),
+        'city': data.get('city', '')
     }
-    return jsonify({"message": "User added successfully", "user": users[username]}), 201
     
+    users[username] = user_data
+    
+    return jsonify({
+        "message": "User added",
+        "user": user_data
+    }), 201
+
 if __name__ == "__main__":
     app.run()
