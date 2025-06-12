@@ -29,10 +29,10 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
         elif self.path == '/status':
             self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
             message = "Status: ok"
-            self.wfile.write(bytes(message, "utf8"))
+            self.wfile.write(json.dumps(message).encode('utf-8'))
             return
 
         elif self.path == '/info':
@@ -48,10 +48,10 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
         else:
             self.send_response(404)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
             message = "Endpoint not found"
-            self.wfile.write(bytes(message, "utf8"))
+            self.wfile.write(json.dumps(message).encode('utf-8'))
 
 
 def run():
