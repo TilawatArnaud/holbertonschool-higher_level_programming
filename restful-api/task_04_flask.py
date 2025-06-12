@@ -22,7 +22,7 @@ def get_usernames():
 @app.route('/status')
 def get_status():
     """Return a JSON response containing the status of the API."""
-    return jsonify({"status": "OK"})
+    return "OK"
 
 @app.route('/users/<username>')
 def get_user(username): 
@@ -32,10 +32,10 @@ def get_user(username):
         return jsonify(user)
     return jsonify({"error": "User not found"}), 404
 
-@app.route('/add_user')
+@app.route('/add_user', methods=['POST'])
 def add_user():
     """Add a new user to the API."""
-    username = request.args.get('username')
+    username = request.json.get('username')
     if not username:
         return jsonify({"error": "Missing username"}), 400
     
@@ -44,9 +44,9 @@ def add_user():
     
     users[username] = {
         "username": username,
-        "name": request.args.get('name'),
-        "age": int(request.args.get('age')),
-        "city": request.args.get('city')
+        "name": request.json.get('name'),
+        "age": int(request.json.get('age')),
+        "city": request.json.get('city')
     }
     return jsonify({"message": "User added successfully"}), 201
     
