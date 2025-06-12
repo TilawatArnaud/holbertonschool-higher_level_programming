@@ -30,17 +30,18 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
         elif self.path == '/status':
             self.send_response(200)
-            self.send_header('Content-type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            data = {"status": "ok"}
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+            message = "Status: ok"
+            self.wfile.write(bytes(message, "utf8"))
             return
 
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b"Not Found")
+            message = "Error 404: Not Found"
+            self.wfile.write(bytes(message, "utf8"))
 
 
 def run():
