@@ -29,10 +29,10 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
         elif self.path == '/status':
             self.send_response(200)
-            self.send_header('Content-type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            message = {"status": "OK"}
-            self.wfile.write(json.dumps(message).encode('utf-8'))
+            message = "OK"
+            self.wfile.write(bytes(message, "utf8"))
             return
 
         elif self.path == '/info':
