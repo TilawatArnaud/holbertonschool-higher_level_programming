@@ -1,2 +1,3 @@
--- Write a SQL script that lists all the tables of a database in your MySQL server.
-SHOW TABLES;
+-- Write a script that prints the following description of the table
+-- first_table from the database hbtn_0c_0 in your MySQL server.
+SELECT * FROM first_table;
