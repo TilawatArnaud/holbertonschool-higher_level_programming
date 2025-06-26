@@ -10,9 +10,9 @@ if __name__ == "__main__":
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],      # First argument: MySQL username
-        passwd=sys.argv[2],    # Second argument: MySQL password
-        db=sys.argv[3]         # Third argument: database name
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
 
     # Get the state name to search for
@@ -21,11 +21,11 @@ if __name__ == "__main__":
     # Create a cursor object
     cur = db.cursor()
 
-    # Build SQL query with parameterized input
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-
-    # Execute the query with the parameter
-    cur.execute(query, (state_name,))
+    # Create SQL query using format()
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name)
+    
+    # Execute the query
+    cur.execute(query)
 
     # Fetch all the rows
     rows = cur.fetchall()
