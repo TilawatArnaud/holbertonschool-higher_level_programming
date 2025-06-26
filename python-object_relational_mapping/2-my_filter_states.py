@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Script that takes an argument and displays all matching states from the database hbtn_0e_0_usa"""
-
+"""Script that takes an argument and displays
+   all matching states from the database hbtn_0e_0_usa
+"""
 import MySQLdb
 import sys
 
@@ -22,7 +23,7 @@ if __name__ == "__main__":
 
     # Build SQL query with parameterized input
     query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    
+
     # Execute the query with the parameter
     cur.execute(query, (state_name,))
 
