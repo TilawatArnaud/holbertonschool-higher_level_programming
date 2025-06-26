@@ -8,30 +8,24 @@ if __name__ == "__main__":
     # Connect to MySQL database
     db = MySQLdb.connect(
         host="localhost",
+        port=3306,
         user=sys.argv[1],
         passwd=sys.argv[2],
         db=sys.argv[3],
-        port=3306
     )
 
     # Create cursor object using the cursor() method
     cursor = db.cursor()
 
     # SQL query to fetch all states
-    query = "SELECT * FROM states ORDER BY id ASC"
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
-    try:
-        # Execute the SQL query
-        cursor.execute(query)
+    # Fetch all rows from the last executed statement
+    rows = cursor.fetchall()
 
-        # Fetch all rows from the last executed statement
-        results = cursor.fetchall()
+    # Print each row
+    for row in rows:
+        print(row)
 
-        # Print each row
-        for row in results:
-            print(row)
-    except MySQLdb.Error as e:
-        print(f"Error: {e}")
-    finally:
-        # Close the database connection
-        db.close()
+    # Close the database connection
+    db.close()
