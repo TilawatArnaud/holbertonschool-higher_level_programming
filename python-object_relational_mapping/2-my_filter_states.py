@@ -22,11 +22,13 @@ if __name__ == "__main__":
     # Create a cursor object
     cur = db.cursor()
 
-    # Create SQL query with parameterized input to prevent SQL injection
-    # and use BINARY for case-sensitive comparison
-    query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id"
-    # Execute the query with parameter
-    cur.execute(query, (state_name,))
+    # Create SQL query using format() as required
+    # Using BINARY for case-sensitive comparison
+    query = "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id".format(
+        state_name
+    )
+    # Execute the query
+    cur.execute(query)
 
     # Fetch all the rows
     rows = cur.fetchall()
