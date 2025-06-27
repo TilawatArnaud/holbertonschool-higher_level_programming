@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Lists all cities from the database hbtn_0e_0_usa."""
+"""
+Lists all cities with their corresponding states from the database hbtn_0e_4_usa.
+The results are displayed as (city_id, city_name, state_name)
+"""
 
 import sys
 import MySQLdb
@@ -14,19 +17,23 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
 
-    # Create cursor object using the cursor() method
-    cursor = db.cursor()
+    # Create cursor object
+    cur = db.cursor()
 
-    # SQL query to fetch all cities
-    cursor.execute("SELECT * FROM cities ORDER BY id ASC")
+    # Execute SQL query to fetch cities with their states
+    query = """
+    SELECT cities.id, cities.name, states.name
+    FROM cities
+    JOIN states ON cities.state_id = states.id
+    ORDER BY cities.id ASC
+    """
+    cur.execute(query)
 
-    # Fetch all rows from the last executed statement
-    rows = cursor.fetchall()
-
-    # Print each row
+    # Fetch and print all rows
+    rows = cur.fetchall()
     for row in rows:
         print(row)
 
-    # Close the database connection and cursor
-    cursor.close()
+    # Close cursor and database connection
+    cur.close()
     db.close()
