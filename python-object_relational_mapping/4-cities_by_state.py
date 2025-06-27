@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all cities with their corresponding states from the database hbtn_0e_4_usa.
+Lists all cities with their corresponding states from the database
 The results are displayed as (city_id, city_name, state_name)
 """
 
