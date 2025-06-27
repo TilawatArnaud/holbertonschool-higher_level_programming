@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """
-Script that lists all cities of a specific state from the database hbtn_0e_4_usa.
-The script is safe from MySQL injections.
+Script that lists all cities of a specific state from the database
+hbtn_0e_4_usa. The script is safe from MySQL injections.
 """
 
 import sys
 import MySQLdb
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: {} <mysql username> <mysql password> <database name> <state name>".format(sys.argv[0]))
+        msg = "Usage: {} user passwd database state"
+        print(msg.format(sys.argv[0]))
         sys.exit(1)
 
     # Connect to MySQL database
@@ -29,18 +31,16 @@ if __name__ == "__main__":
 
     # Execute SQL query with parameterized input to prevent SQL injection
     query = """
-    SELECT cities.name 
-    FROM cities 
-    JOIN states ON cities.state_id = states.id 
-    WHERE states.name = %s 
+    SELECT cities.name
+    FROM cities
+    JOIN states ON cities.state_id = states.id
+    WHERE states.name = %s
     ORDER BY cities.id ASC
     """
     cur.execute(query, (state_name,))
 
-    # Fetch all rows and extract city names
+    # Fetch and format results
     cities = [row[0] for row in cur.fetchall()]
-    
-    # Print cities separated by commas
     print(", ".join(cities))
 
     # Close cursor and database connection

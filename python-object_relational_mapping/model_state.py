@@ -7,13 +7,15 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+
 # Create an instance of declarative_base
 Base = declarative_base()
+
 
 class State(Base):
     """
     State class that inherits from Base
-    
+
     Attributes:
         __tablename__ (str): The name of the MySQL table to store States
         id (sqlalchemy.Integer): The state's id
@@ -23,26 +25,28 @@ class State(Base):
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     name = Column(String(128), nullable=False)
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: {} <mysql username> <mysql password> <database name>".format(sys.argv[0]))
+        msg = "Usage: {} <mysql username> <mysql password> <database name>"
+        print(msg.format(sys.argv[0]))
         sys.exit(1)
 
     # Create engine that stores data in the local directory's
     # hbtn_0e_6_usa database
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
-        sys.argv[1],  # MySQL username
-        sys.argv[2],  # MySQL password
-        sys.argv[3]   # Database name
-    ), pool_pre_ping=True)
+    username, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+            username, password, db_name
+        ),
+        pool_pre_ping=True
+    )
 
     # Create all tables in the engine
     Base.metadata.create_all(engine)
 
     # Create a configured "Session" class
     Session = sessionmaker(bind=engine)
-    
-    # Create a Session
     session = Session()
 
     # Query all State objects and print them
