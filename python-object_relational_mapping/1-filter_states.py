@@ -19,8 +19,8 @@ if __name__ == "__main__":
     # Create cursor object using the cursor() method
     cursor = db.cursor()
 
-    # SQL query to fetch all states
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+    # SQL query to fetch all states starting with 'N' (case sensitive)
+    cursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
 
     # Fetch all rows from the last executed statement
     rows = cursor.fetchall()
