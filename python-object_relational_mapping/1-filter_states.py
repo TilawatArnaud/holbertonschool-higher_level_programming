@@ -20,7 +20,9 @@ if __name__ == "__main__":
     cursor = db.cursor()
 
     # SQL query to fetch all states starting with 'N' (case sensitive)
-    cursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
+    query = ("SELECT * FROM states WHERE name "
+             "LIKE BINARY 'N%' ORDER BY id ASC")
+    cursor.execute(query)
 
     # Fetch all rows from the last executed statement
     rows = cursor.fetchall()
