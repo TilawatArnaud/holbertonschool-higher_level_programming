@@ -4,7 +4,7 @@
     from the database hbtn_0e_6_usa.
 """
 import sys
-from model_state import State, Base 
+from model_state import State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
