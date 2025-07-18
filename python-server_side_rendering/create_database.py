@@ -4,10 +4,7 @@ def create_database():
     conn = sqlite3.connect('products.db')
     cursor = conn.cursor()
     cursor.execute('''
-        DROP TABLE IF EXISTS Products
-    ''')
-    cursor.execute('''
-        CREATE TABLE Products (
+        CREATE TABLE IF NOT EXISTS Products (
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL,
             category TEXT NOT NULL,
@@ -25,4 +22,3 @@ def create_database():
 
 if __name__ == '__main__':
     create_database()
-    print("Database created and populated successfully!")
