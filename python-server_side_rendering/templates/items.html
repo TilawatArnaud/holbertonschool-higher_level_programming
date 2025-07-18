@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Items List - My Flask App</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .no-items {
+            color: #666;
+            font-style: italic;
+        }
+        .items-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .items-list li {
+            padding: 8px;
+            margin: 4px 0;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    <h1>Items List</h1>
+    
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+    
+    {% if items %}
+        <ul class="items-list">
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-items">No items found</p>
+    {% endif %}
+    
+    {% include 'footer.html' %}
+</body>
+</html>
