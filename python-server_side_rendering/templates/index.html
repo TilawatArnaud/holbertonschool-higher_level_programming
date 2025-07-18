@@ -2,16 +2,63 @@
 <html lang="en">
 <head>
     <title>My Flask App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .feature-list {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: white;
+            border-left: 4px solid #3498db;
+            list-style-type: none;
+        }
+        .welcome-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    {%include 'header.html' %}
-    <h1>Welcome to My Flask App</h1>
-    <p>This is a simple Flask application.</p>
-    <ul>
-        <li>Flask</li>
-        <li>HTML</li>
-        <li>Templates</li>
-    </ul>
-    {%include 'footer.html' %}
+    {% include 'header.html' %}
+    <main>
+        <h1>Welcome to My Flask App</h1>
+        <p class="welcome-text">
+            This is a simple yet powerful Flask application demonstrating the use of Jinja2 templates.
+            The application features reusable components, clean routing, and responsive design.
+        </p>
+        
+        <div class="feature-list">
+            <h2>Features:</h2>
+            <ul>
+                <li><strong>Flask</strong> - A lightweight WSGI web application framework</li>
+                <li><strong>Jinja2 Templates</strong> - For dynamic HTML generation</li>
+                <li><strong>Responsive Design</strong> - Works on all device sizes</li>
+                <li><strong>Reusable Components</strong> - Header and footer templates</li>
+                <li><strong>Clean Routing</strong> - Organized URL structure</li>
+            </ul>
+        </div>
+    </main>
+    {% include 'footer.html' %}
 </body>
 </html>
